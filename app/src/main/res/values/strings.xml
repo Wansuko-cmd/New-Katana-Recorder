@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">KatanaRecorder</string>
+    <string name="search_navigation">search</string>
+    <string name="list_navigation">list</string>
+    <string name="setting_navigation">setting</string>
 </resources>
