@@ -1,0 +1,37 @@
+@startuml
+entity "katana_data_table"{
+    + id [PK]
+    title: String
+    image_url: String?
+    value: MutableMap<String, String>
+}
+
+note left
+    title:表示される名前
+    image_url:表示する画像の名前
+    value:カラム名と値を持つMap
+end note
+
+entity "katana_data_tag_table"{
+    + id [PK]
+    #katana_data_id [FK(katana_data, id)]
+    #tag_id [FK(tag, id)]
+}
+
+note left
+    katana_data_tableとtag_tableの中間テーブル
+end note
+
+entity "tag_table"{
+    + id [PK]
+    color: String
+}
+
+note left
+    color:タグの色
+end note
+
+katana_data_table}o--o{katana_data_tag_table
+katana_data_tag_table}o--o{tag_table
+
+@enduml
