@@ -10,6 +10,8 @@ class ListAdapter : RecyclerView.Adapter<ListViewHolder>(){
 
     private var list: MutableList<SampleModel> = mutableListOf()
 
+    var clickTitleOnListener: (id: Int) -> Unit = {}
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemListContentBinding.inflate(inflater, parent, false)
@@ -22,6 +24,10 @@ class ListAdapter : RecyclerView.Adapter<ListViewHolder>(){
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         holder.listTitle.text = this.list[position].title
+
+        holder.listTitle.setOnClickListener {
+            clickTitleOnListener(position)
+        }
     }
 
     fun setData(list: MutableList<SampleModel>){
