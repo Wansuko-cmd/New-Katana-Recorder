@@ -1,4 +1,4 @@
-package com.wsr.katanarecorder.main.ui.search
+package com.wsr.katanarecorder.main.search
 
 import android.os.Bundle
 import android.view.LayoutInflater

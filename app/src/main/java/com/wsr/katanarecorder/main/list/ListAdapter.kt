@@ -1,11 +1,15 @@
-package com.wsr.katanarecorder.main.ui.list
+package com.wsr.katanarecorder.main.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.wsr.katanarecorder.databinding.ItemListContentBinding
+import com.wsr.katanarecorder.db.SampleModel
 
 class ListAdapter : RecyclerView.Adapter<ListViewHolder>(){
+
+    private var list: MutableList<SampleModel> = mutableListOf()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemListContentBinding.inflate(inflater, parent, false)
@@ -13,10 +17,14 @@ class ListAdapter : RecyclerView.Adapter<ListViewHolder>(){
     }
 
     override fun getItemCount(): Int {
-        return 5
+        return list.size
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        holder.listTitle.text = "Hello, ${position}"
+        holder.listTitle.text = this.list[position].title
+    }
+
+    fun setData(list: MutableList<SampleModel>){
+        this.list = list
     }
 }

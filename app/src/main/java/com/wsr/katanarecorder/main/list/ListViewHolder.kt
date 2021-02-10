@@ -1,4 +1,4 @@
-package com.wsr.katanarecorder.main.ui.list
+package com.wsr.katanarecorder.main.list
 
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView

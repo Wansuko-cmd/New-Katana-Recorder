@@ -1,4 +1,4 @@
-package com.wsr.katanarecorder.main.ui.setting
+package com.wsr.katanarecorder.main.setting
 
 import android.os.Bundle
 import android.view.LayoutInflater
