@@ -11,5 +11,5 @@ data class SampleModel(
         val id: Int,
         val title: String,
         var url: String?,
-        val value: MutableMap<String, String>
+        val value: MutableList<KatanaValue>
 )

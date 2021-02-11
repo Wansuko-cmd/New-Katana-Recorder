@@ -5,19 +5,14 @@ import androidx.lifecycle.MutableLiveData
 
 class SampleDB{
     private val test1 = SampleModel(1, "備前長船盛光", null,
-            mutableMapOf(
-                    "銘" to "備前長船盛光",
-                    "種別" to "太刀",
-                    "産地" to "備前長船派",
-                    "時代" to "室町中期",
-                    "刃長" to "７９ｃｍ",
-                    "反り" to "２．４ｃｍ",
-                    "刃文" to "丁子",
-                    "地鉄" to "柾目",
-                    "帽子" to "小丸返る",
-                    "茎" to "生ぶ",
-                    "備考" to "こちらは備前長船刀剣博物館にて貯蔵されている一振り。室町前期の太刀でありながら生ぶであり、大変貴重なものとなっている。"
-            )
+        mutableListOf(
+            KatanaValue("銘", "備前長船盛光", 1),
+            KatanaValue("種別", "太刀", 1),
+            KatanaValue("産地", "備前長船派", 1),
+            KatanaValue("時代", "室町中期", 1),
+            KatanaValue("刃長", "79cm", 1),
+            KatanaValue("備考", "こちらは備前長船刀剣博物館にて貯蔵されている一振り。室町前期の太刀でありながら生ぶであり、大変貴重なものとなっている。", 1)
+        )
     )
 
     private val data: MutableLiveData<MutableList<SampleModel>> by lazy{
