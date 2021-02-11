@@ -15,12 +15,19 @@ class SampleDB{
         )
     )
 
+    private val test2 = SampleModel(2, "テスト丸", null,
+        mutableListOf(
+            KatanaValue("TEST", "これはテストです", 1),
+            KatanaValue("Hello", "World", 1)
+        )
+    )
+
     private val data: MutableLiveData<MutableList<SampleModel>> by lazy{
         MutableLiveData<MutableList<SampleModel>>()
     }
 
     init{
-        data.value = mutableListOf(test1)
+        data.value = mutableListOf(test1, test2)
     }
 
     fun getAll(): LiveData<MutableList<SampleModel>> {
