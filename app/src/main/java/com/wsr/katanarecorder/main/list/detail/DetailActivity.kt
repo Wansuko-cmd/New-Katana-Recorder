@@ -3,9 +3,12 @@ package com.wsr.katanarecorder.main.list.detail
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
+import android.view.Menu
+import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import com.wsr.katanarecorder.R
+import com.wsr.katanarecorder.databinding.ActivityDetailBinding
 import com.wsr.katanarecorder.main.list.detail.show.ListShowFragmentArgs
 
 class DetailActivity : AppCompatActivity() {
@@ -16,6 +19,12 @@ class DetailActivity : AppCompatActivity() {
 
         val id = intent.getIntExtra("ID", 404)
         val args = ListShowFragmentArgs(id)
+
+        /*val binding = ActivityDetailBinding.inflate(layoutInflater)
+        binding.detailToolbar.inflateMenu(R.menu.list_detail_menu)
+
+        val detailToolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.detail_toolbar)
+        detailToolbar.inflateMenu(R.menu.list_detail_menu)*/
 
         Log.d("id", id.toString())
 

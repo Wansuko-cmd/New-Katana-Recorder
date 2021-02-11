@@ -1,11 +1,10 @@
 package com.wsr.katanarecorder.main.list.detail.edit
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import com.wsr.katanarecorder.R
 import com.wsr.katanarecorder.databinding.FragmentListDetailEditBinding
 
 class ListEditFragment : Fragment() {
@@ -14,6 +13,24 @@ class ListEditFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val args: ListEditFragmentArgs by navArgs()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.list_detail_edit_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.edit_save_menu -> {
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

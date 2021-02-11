@@ -1,13 +1,16 @@
 package com.wsr.katanarecorder.main.list.detail.show
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.wsr.katanarecorder.R
+import com.wsr.katanarecorder.databinding.ActivityDetailBinding
 import com.wsr.katanarecorder.databinding.FragmentListDetailShowBinding
 import com.wsr.katanarecorder.main.list.ListViewModel
 
@@ -20,6 +23,26 @@ class ListShowFragment : Fragment() {
     private lateinit var listViewModel: ListViewModel
 
     private val args: ListShowFragmentArgs by navArgs()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.list_detail_show_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.show_edit_menu -> {
+                val action = ListShowFragmentDirections.showDetailToEditDetail(args.id)
+                findNavController().navigate(action)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,14 +60,22 @@ class ListShowFragment : Fragment() {
         val recyclerView = binding.listDetailShowRecyclerView
         listShowAdapter = ListShowAdapter()
 
+        setToolbar()
+
         listViewModel = ViewModelProvider(
             this,
             ViewModelProvider.NewInstanceFactory()
         ).get(ListViewModel::class.java)
 
+        val divider = DividerItemDecoration(
+            requireContext(),
+            LinearLayoutManager(requireContext()).orientation
+        )
+
         recyclerView.apply{
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
+            addItemDecoration(divider)
             adapter = listShowAdapter
         }
 
@@ -58,5 +89,22 @@ class ListShowFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun setToolbar(){
+        /*val detailToolbar = ActivityDetailBinding.inflate(layoutInflater).detailToolbar
+        detailToolbar.inflateMenu(R.menu.list_detail_menu)
+
+        detailToolbar.menu.setGroupVisible(R.id.show_menu_group, true)
+        detailToolbar.menu.setGroupVisible(R.id.edit_menu_group, false)
+        detailToolbar.setOnMenuItemClickListener{ menuItem ->
+            when(menuItem.itemId){
+                R.id.edit_menu -> {
+                    val action = ListShowFragmentDirections.showDetailToEditDetail(args.id)
+                    findNavController().navigate(action)
+                }
+            }
+            true
+        }*/
     }
 }
