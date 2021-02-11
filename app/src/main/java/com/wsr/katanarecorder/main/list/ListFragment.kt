@@ -63,7 +63,7 @@ class ListFragment() : Fragment() {
 
     private val clickTitleOnListener: (Int) -> Unit = { id ->
         val intent = Intent(requireContext(), DetailActivity::class.java)
-        //intent.putExtra("ID", -1)
+        intent.putExtra("ID", id)
         startActivity(intent)
     }
 }

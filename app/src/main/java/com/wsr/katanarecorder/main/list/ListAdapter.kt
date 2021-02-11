@@ -26,7 +26,7 @@ class ListAdapter : RecyclerView.Adapter<ListViewHolder>(){
         holder.listTitle.text = this.list[position].title
 
         holder.listTitle.setOnClickListener {
-            clickTitleOnListener(position)
+            clickTitleOnListener(list[position].id)
         }
     }
 
