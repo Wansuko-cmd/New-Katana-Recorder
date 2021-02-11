@@ -8,8 +8,8 @@ value:刀ごとの詳細を記述
 */
 
 data class SampleModel(
-        val id: Int,
-        val title: String,
-        var url: String?,
-        val value: MutableList<KatanaValue>
+        val id: Int = -404,
+        val title: String = "",
+        var url: String? = null,
+        val value: MutableList<KatanaValue> = mutableListOf()
 )

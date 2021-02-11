@@ -5,13 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.wsr.katanarecorder.databinding.FragmentListDetailShowBinding
+import com.wsr.katanarecorder.main.list.ListViewModel
 
 class ListShowFragment : Fragment() {
 
     private var _binding: FragmentListDetailShowBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var listShowAdapter: ListShowAdapter
+    private lateinit var listViewModel: ListViewModel
 
     private val args: ListShowFragmentArgs by navArgs()
 
@@ -28,6 +34,25 @@ class ListShowFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val id = args.id
+        val recyclerView = binding.listDetailShowRecyclerView
+        listShowAdapter = ListShowAdapter()
+
+        listViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        ).get(ListViewModel::class.java)
+
+        recyclerView.apply{
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(context)
+            adapter = listShowAdapter
+        }
+
+        listViewModel.sampleModel.observe(viewLifecycleOwner, { list ->
+            list.find{it.id == id}?.let{
+                listShowAdapter.setData(it)
+            }
+        })
     }
 
     override fun onDestroyView() {
