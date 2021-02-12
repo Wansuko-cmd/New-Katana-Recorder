@@ -23,6 +23,7 @@ class ListEditFragment : Fragment() {
     private lateinit var listEditAdapter: ListEditAdapter
     private lateinit var listViewModel: ListViewModel
     private lateinit var editViewModel: EditViewModel
+    private lateinit var observer: ListEditImageSetter
     private lateinit var checkSetData: Job
 
     private val args: ListEditFragmentArgs by navArgs()
@@ -71,6 +72,10 @@ class ListEditFragment : Fragment() {
         ).get(EditViewModel::class.java)
 
         listEditAdapter = ListEditAdapter(this, editViewModel)
+
+        observer = ListEditImageSetter(requireActivity(), editViewModel)
+        lifecycle.addObserver(observer)
+        editViewModel.setObserver(observer)
 
         val divider = DividerItemDecoration(
                 requireContext(),

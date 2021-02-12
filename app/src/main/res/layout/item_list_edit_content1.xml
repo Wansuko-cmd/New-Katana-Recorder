@@ -18,6 +18,7 @@
             android:id="@+id/list_edit_image"
             android:layout_height="200dp"
             android:layout_width="match_parent"
+            android:onClick="@{() -> editViewModel.listEditImageSetter.selectImage()}"
             app:imagePath="@{editViewModel.imageUri}"
             tools:src="@drawable/ic_baseline_add_a_photo_24" />
     </androidx.appcompat.widget.LinearLayoutCompat>

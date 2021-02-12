@@ -15,6 +15,12 @@ class EditViewModel : ViewModel() {
     val imageUri: MutableLiveData<Uri?> = MutableLiveData<Uri?>()
     val katanaValue: MutableLiveData<MutableList<KatanaValue>> = MutableLiveData<MutableList<KatanaValue>>()
 
+    lateinit var listEditImageSetter: ListEditImageSetter
+
+    fun setObserver(observer: ListEditImageSetter){
+        this.listEditImageSetter = observer
+    }
+
     suspend fun checkSetData(): Boolean {
         return try {
             Log.i("ok", "I'll get the title...")
