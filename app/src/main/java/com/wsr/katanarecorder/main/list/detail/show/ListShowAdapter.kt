@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.wsr.katanarecorder.databinding.ItemListShowContent1Binding
 import com.wsr.katanarecorder.databinding.ItemListShowContent2Binding
 import com.wsr.katanarecorder.databinding.ItemListShowContent3Binding
-import com.wsr.katanarecorder.db.KatanaValue
 import com.wsr.katanarecorder.db.SampleModel
 import com.wsr.katanarecorder.main.list.detail.show.view_holder.ShowItem1Holder
 import com.wsr.katanarecorder.main.list.detail.show.view_holder.ShowItem2Holder

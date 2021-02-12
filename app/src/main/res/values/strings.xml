@@ -3,4 +3,6 @@
     <string name="search_navigation">search</string>
     <string name="list_navigation">list</string>
     <string name="setting_navigation">setting</string>
+    <string name="save_menu">save_menu</string>
+    <string name="edit_menu">edit_menu</string>
 </resources>

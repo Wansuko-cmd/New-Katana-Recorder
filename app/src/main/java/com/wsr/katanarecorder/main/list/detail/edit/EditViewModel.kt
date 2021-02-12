@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModel
 import com.wsr.katanarecorder.BuildConfig
 import com.wsr.katanarecorder.db.KatanaValue
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeout
 import java.io.File
 import java.lang.Exception

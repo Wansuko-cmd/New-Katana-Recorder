@@ -1,6 +1,5 @@
 package com.wsr.katanarecorder.main.list.detail.edit.view_holder
 
-import android.widget.EditText
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.wsr.katanarecorder.databinding.ItemListEditContent3Binding

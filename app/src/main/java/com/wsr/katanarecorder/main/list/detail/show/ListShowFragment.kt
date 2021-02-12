@@ -1,7 +1,6 @@
 package com.wsr.katanarecorder.main.list.detail.show
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -10,7 +9,6 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wsr.katanarecorder.R
-import com.wsr.katanarecorder.databinding.ActivityDetailBinding
 import com.wsr.katanarecorder.databinding.FragmentListDetailShowBinding
 import com.wsr.katanarecorder.main.list.ListViewModel
 

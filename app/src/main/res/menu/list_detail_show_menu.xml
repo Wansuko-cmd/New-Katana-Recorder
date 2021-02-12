@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/show_edit_menu"
-        android:title="edit"
+        android:title="@string/edit_menu"
         android:icon="@drawable/ic_baseline_edit_24"
         app:showAsAction="ifRoom"/>
 </menu>
