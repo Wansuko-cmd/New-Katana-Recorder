@@ -1,7 +1,6 @@
 package com.wsr.katanarecorder.main.list.detail.edit
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -13,6 +12,7 @@ import com.wsr.katanarecorder.databinding.FragmentListDetailEditBinding
 import com.wsr.katanarecorder.main.list.ListViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class ListEditFragment : Fragment() {
@@ -23,6 +23,7 @@ class ListEditFragment : Fragment() {
     private lateinit var listEditAdapter: ListEditAdapter
     private lateinit var listViewModel: ListViewModel
     private lateinit var editViewModel: EditViewModel
+    private lateinit var checkSetData: Job
 
     private val args: ListEditFragmentArgs by navArgs()
 
@@ -93,7 +94,7 @@ class ListEditFragment : Fragment() {
             }
         })
 
-        GlobalScope.launch(Dispatchers.Main) {
+        checkSetData = GlobalScope.launch(Dispatchers.Main) {
             if(editViewModel.checkSetData()) listEditAdapter.notifyDataSetChanged()
         }
     }
@@ -101,5 +102,6 @@ class ListEditFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        checkSetData.cancel()
     }
 }

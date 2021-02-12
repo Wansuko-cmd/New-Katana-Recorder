@@ -17,17 +17,17 @@ class EditViewModel : ViewModel() {
 
     suspend fun checkSetData(): Boolean {
         return try {
-            Log.d("ok", "I'll get the title...")
+            Log.i("ok", "I'll get the title...")
             withTimeout(1000) {
                 while (true) {
                     if (title.value != null) break
-                    Log.d("I wait for", "getting title...")
+                    Log.i("I wait for", "getting title...")
                     delay(100)
                 }
                 true
             }
         } catch (e: Exception) {
-            Log.d("I missed getting title", "error: $e")
+            Log.e("I missed getting title", "error: $e")
             false
         }
     }

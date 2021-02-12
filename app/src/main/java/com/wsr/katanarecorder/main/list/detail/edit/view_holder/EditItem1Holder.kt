@@ -8,7 +8,7 @@ import com.wsr.katanarecorder.main.list.detail.edit.EditViewModel
 class EditItem1Holder(private val binding: ItemListEditContent1Binding) : RecyclerView.ViewHolder(binding.root){
 
     fun setBind(viewLifecycleOwner: LifecycleOwner, editViewModel: EditViewModel){
-        binding.run{
+        binding.run {
             lifecycleOwner = viewLifecycleOwner
             this.editViewModel = editViewModel
 
