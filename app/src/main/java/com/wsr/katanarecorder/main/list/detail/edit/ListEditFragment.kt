@@ -1,6 +1,7 @@
 package com.wsr.katanarecorder.main.list.detail.edit
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -10,6 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.wsr.katanarecorder.R
 import com.wsr.katanarecorder.databinding.FragmentListDetailEditBinding
 import com.wsr.katanarecorder.main.list.ListViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class ListEditFragment : Fragment() {
 
@@ -34,6 +38,7 @@ class ListEditFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.edit_save_menu -> {
+                listEditAdapter.notifyDataSetChanged()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -64,14 +69,6 @@ class ListEditFragment : Fragment() {
                 ViewModelProvider.NewInstanceFactory()
         ).get(EditViewModel::class.java)
 
-        listViewModel.sampleModel.observe(viewLifecycleOwner, { list ->
-            list.find{it.id == id}?.let{
-                editViewModel.title.postValue(it.title)
-                //editViewModel.imageUrl.postValue(it.url)
-                editViewModel.katanaValue.postValue(it.value)
-            }
-        })
-
         listEditAdapter = ListEditAdapter(this, editViewModel)
 
         val divider = DividerItemDecoration(
@@ -86,6 +83,19 @@ class ListEditFragment : Fragment() {
             adapter = listEditAdapter
         }
 
+
+        listViewModel.sampleModel.observe(viewLifecycleOwner, { list ->
+            list.find{it.id == id}?.let{
+                editViewModel.title.postValue(it.title)
+                //editViewModel.imageUrl.postValue(it.url)
+                editViewModel.katanaValue.postValue(it.value)
+
+            }
+        })
+
+        GlobalScope.launch(Dispatchers.Main) {
+            if(editViewModel.checkSetData()) listEditAdapter.notifyDataSetChanged()
+        }
     }
 
     override fun onDestroyView() {

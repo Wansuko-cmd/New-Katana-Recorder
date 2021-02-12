@@ -16,7 +16,4 @@ class EditItem2Holder(private val binding: ItemListEditContent2Binding) : Recycl
             executePendingBindings()
         }
     }
-    /*val title: EditText = binding.listEditTitle
-    var viewModel: EditViewModel? = binding.editViewModel
-    var index: Int? = binding.index*/
 }
