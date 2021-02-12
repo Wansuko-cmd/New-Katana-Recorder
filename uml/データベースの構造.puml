@@ -3,13 +3,13 @@ entity "katana_data_table"{
     + id [PK]
     title: String
     image_url: String?
-    value: MutableMap<String, String>
+    value: List<KatanaValue>
 }
 
 note left
     title:表示される名前
     image_url:表示する画像の名前
-    value:カラム名と値を持つMap
+    value:カラム名と値と編集タイプを持つ型
 end note
 
 entity "katana_data_tag_table"{
@@ -30,6 +30,20 @@ entity "tag_table"{
 note left
     color:タグの色
 end note
+
+entity "KatanaValue"{
+    key: String
+    value: String
+    type: Int
+}
+
+note left
+    key:項目名
+    value:値
+    type:編集画面でのViewTypeを指定するやつ
+end note
+
+KatanaValue -[hidden]do- katana_data_table
 
 katana_data_table}o--o{katana_data_tag_table
 katana_data_tag_table}o--o{tag_table
