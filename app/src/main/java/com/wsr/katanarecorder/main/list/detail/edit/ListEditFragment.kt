@@ -18,6 +18,7 @@ class ListEditFragment : Fragment() {
 
     private lateinit var listEditAdapter: ListEditAdapter
     private lateinit var listViewModel: ListViewModel
+    private lateinit var editViewModel: EditViewModel
 
     private val args: ListEditFragmentArgs by navArgs()
 
@@ -52,12 +53,18 @@ class ListEditFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val id = args.id
         val recyclerView = binding.detailEditRecyclerView
-        listEditAdapter = ListEditAdapter()
 
         listViewModel = ViewModelProvider(
                 this,
                 ViewModelProvider.NewInstanceFactory()
         ).get(ListViewModel::class.java)
+
+        editViewModel = ViewModelProvider(
+                this,
+                ViewModelProvider.NewInstanceFactory()
+        ).get(EditViewModel::class.java)
+
+        listEditAdapter = ListEditAdapter(this, editViewModel)
 
         val divider = DividerItemDecoration(
                 requireContext(),
@@ -73,7 +80,9 @@ class ListEditFragment : Fragment() {
 
         listViewModel.sampleModel.observe(viewLifecycleOwner, { list ->
             list.find{it.id == id}?.let{
-                listEditAdapter.setData(it)
+                editViewModel.title.postValue(it.title)
+                editViewModel.imageUrl.postValue(it.url)
+                editViewModel.katanaValue.postValue(it.value)
             }
         })
 
