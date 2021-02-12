@@ -1,6 +1,5 @@
 package com.wsr.katanarecorder.main.list.detail.edit
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.net.Uri
 import android.os.Environment
@@ -55,7 +54,7 @@ class ListEditImageSetter(
         val items = arrayOf("画像を選択", "撮影する")
 
         AlertDialog.Builder(activity)
-                .setItems(items){ dialog, which ->
+                .setItems(items){ _, which ->
                     when(which){
                         0 -> getContent.launch("image/*")
                         1 -> takePicture()

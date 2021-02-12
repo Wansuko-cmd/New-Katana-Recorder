@@ -93,7 +93,7 @@ class ListEditFragment : Fragment() {
         listViewModel.sampleModel.observe(viewLifecycleOwner, { list ->
             list.find{it.id == id}?.let{
                 editViewModel.title.postValue(it.title)
-                //editViewModel.imageUrl.postValue(it.url)
+                editViewModel.setUriFromString(requireActivity(), it.url)
                 editViewModel.katanaValue.postValue(it.value)
 
             }

@@ -1,13 +1,18 @@
 package com.wsr.katanarecorder.main.list.detail.edit
 
+import android.app.Activity
 import android.net.Uri
+import android.os.Environment
 import android.util.Log
+import androidx.core.content.FileProvider
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.wsr.katanarecorder.BuildConfig
 import com.wsr.katanarecorder.db.KatanaValue
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeout
+import java.io.File
 import java.lang.Exception
 
 class EditViewModel : ViewModel() {
@@ -19,6 +24,16 @@ class EditViewModel : ViewModel() {
 
     fun setObserver(observer: ListEditImageSetter){
         this.listEditImageSetter = observer
+    }
+
+    fun setUriFromString(activity: Activity, filename: String?){
+        filename?.let{
+            val path = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+            val file = File(path, filename)
+
+            val uri = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID + ".provider", file)
+            this.imageUri.postValue(uri)
+        }
     }
 
     suspend fun checkSetData(): Boolean {
