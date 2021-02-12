@@ -4,11 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
-import com.wsr.katanarecorder.R
 import com.wsr.katanarecorder.databinding.ItemListEditContent1Binding
 import com.wsr.katanarecorder.databinding.ItemListEditContent2Binding
 import com.wsr.katanarecorder.databinding.ItemListEditContent3Binding
-import com.wsr.katanarecorder.db.SampleModel
 import com.wsr.katanarecorder.main.list.detail.edit.view_holder.EditItem1Holder
 import com.wsr.katanarecorder.main.list.detail.edit.view_holder.EditItem2Holder
 import com.wsr.katanarecorder.main.list.detail.edit.view_holder.EditItem3Holder
@@ -44,13 +42,9 @@ class ListEditAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder){
-            is EditItem1Holder -> holder.bind()
+            is EditItem1Holder -> holder.setBind(viewLifecycleOwner, editViewModel)
             is EditItem2Holder -> holder.setBind(viewLifecycleOwner, editViewModel)
             is EditItem3Holder -> holder.setBind(viewLifecycleOwner, editViewModel, position - 2)
         }
-    }
-
-    private fun EditItem1Holder.bind(){
-
     }
 }

@@ -7,9 +7,9 @@ import com.wsr.katanarecorder.R
 
 object ImageViewBindingAdapter {
 
-    @BindingAdapter("imageUrl")
+    @BindingAdapter("imagePath")
     @JvmStatic
-    fun ImageView.imageUrl(uri: Uri?){
+    fun ImageView.imagePath(uri: Uri?){
         if(uri == null){
             this.setImageResource(R.drawable.ic_baseline_add_a_photo_24)
             return
