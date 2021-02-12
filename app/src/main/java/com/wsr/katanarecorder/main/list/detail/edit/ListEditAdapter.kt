@@ -37,7 +37,7 @@ class ListEditAdapter(
     }
 
     override fun getItemCount(): Int {
-        return editViewModel.katanaValue.value!!.size + 2
+        return if(editViewModel.katanaValue.value != null) editViewModel.katanaValue.value!!.size + 2 else 0
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

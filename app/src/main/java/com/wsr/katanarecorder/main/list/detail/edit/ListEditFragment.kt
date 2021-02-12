@@ -64,6 +64,14 @@ class ListEditFragment : Fragment() {
                 ViewModelProvider.NewInstanceFactory()
         ).get(EditViewModel::class.java)
 
+        listViewModel.sampleModel.observe(viewLifecycleOwner, { list ->
+            list.find{it.id == id}?.let{
+                editViewModel.title.postValue(it.title)
+                //editViewModel.imageUrl.postValue(it.url)
+                editViewModel.katanaValue.postValue(it.value)
+            }
+        })
+
         listEditAdapter = ListEditAdapter(this, editViewModel)
 
         val divider = DividerItemDecoration(
@@ -77,14 +85,6 @@ class ListEditFragment : Fragment() {
             addItemDecoration(divider)
             adapter = listEditAdapter
         }
-
-        listViewModel.sampleModel.observe(viewLifecycleOwner, { list ->
-            list.find{it.id == id}?.let{
-                editViewModel.title.postValue(it.title)
-                //editViewModel.imageUrl.postValue(it.url)
-                editViewModel.katanaValue.postValue(it.value)
-            }
-        })
 
     }
 
