@@ -1,12 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/list_show_image"
+        android:id="@+id/list_edit_image"
         android:layout_height="200dp"
         android:layout_width="match_parent"
         tools:src="@drawable/ic_baseline_add_a_photo_24"/>

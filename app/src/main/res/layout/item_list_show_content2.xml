@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.appcompat.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/list_show_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,4 +14,4 @@
         android:textStyle="bold"
         tools:text="Title"/>
 
-</LinearLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

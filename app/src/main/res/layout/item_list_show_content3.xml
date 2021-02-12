@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.appcompat.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -12,7 +12,7 @@
         android:layout_width="5dp"
         android:layout_height="wrap_content"/>
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/list_show_key"
         android:padding="2dp"
         android:layout_width="44dp"
@@ -27,7 +27,7 @@
         android:layout_width="10dp"
         android:layout_height="wrap_content"/>
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp"/>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/list_show_value"
             android:padding="2dp"
             android:layout_width="match_parent"
@@ -47,6 +47,6 @@
             tools:text="Contents"
             tools:ignore="NestedWeights" />
 
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-</LinearLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

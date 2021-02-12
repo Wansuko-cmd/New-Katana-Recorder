@@ -60,8 +60,6 @@ class ListShowFragment : Fragment() {
         val recyclerView = binding.listDetailShowRecyclerView
         listShowAdapter = ListShowAdapter()
 
-        setToolbar()
-
         listViewModel = ViewModelProvider(
             this,
             ViewModelProvider.NewInstanceFactory()
@@ -89,22 +87,5 @@ class ListShowFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun setToolbar(){
-        /*val detailToolbar = ActivityDetailBinding.inflate(layoutInflater).detailToolbar
-        detailToolbar.inflateMenu(R.menu.list_detail_menu)
-
-        detailToolbar.menu.setGroupVisible(R.id.show_menu_group, true)
-        detailToolbar.menu.setGroupVisible(R.id.edit_menu_group, false)
-        detailToolbar.setOnMenuItemClickListener{ menuItem ->
-            when(menuItem.itemId){
-                R.id.edit_menu -> {
-                    val action = ListShowFragmentDirections.showDetailToEditDetail(args.id)
-                    findNavController().navigate(action)
-                }
-            }
-            true
-        }*/
     }
 }
