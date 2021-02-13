@@ -38,7 +38,7 @@ class ListFragment : Fragment() {
 
         listViewModel = ViewModelProvider(
                 this,
-                ViewModelProvider.NewInstanceFactory()
+                ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
         ).get(ListViewModel::class.java)
 
         recyclerView.apply {
@@ -47,7 +47,7 @@ class ListFragment : Fragment() {
             adapter = listAdapter
         }
 
-        listViewModel.sampleModel.observe(viewLifecycleOwner, {
+        listViewModel.katanaData.observe(viewLifecycleOwner, {
             it?.let{
                 listAdapter.setData(it)
             }

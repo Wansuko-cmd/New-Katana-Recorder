@@ -60,7 +60,7 @@ class ListShowFragment : Fragment() {
 
         listViewModel = ViewModelProvider(
             this,
-            ViewModelProvider.NewInstanceFactory()
+            ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
         ).get(ListViewModel::class.java)
 
         val divider = DividerItemDecoration(
@@ -75,7 +75,7 @@ class ListShowFragment : Fragment() {
             adapter = listShowAdapter
         }
 
-        listViewModel.sampleModel.observe(viewLifecycleOwner, { list ->
+        listViewModel.katanaData.observe(viewLifecycleOwner, { list ->
             list.find{it.id == id}?.let{
                 listShowAdapter.setData(it)
             }

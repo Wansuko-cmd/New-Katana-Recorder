@@ -2,20 +2,20 @@
 entity "katana_data_table"{
     + id [PK]
     title: String
-    image_url: String?
-    value: List<KatanaValue>
+    imageName: String?
+    katanaData: List<KatanaValue>
 }
 
 note left
     title:表示される名前
-    image_url:表示する画像の名前
-    value:カラム名と値と編集タイプを持つ型
+    imageName:表示する画像の名前
+    katanaData:カラム名と値と編集タイプを持つ型
 end note
 
 entity "katana_data_tag_table"{
     + id [PK]
-    #katana_data_id [FK(katana_data, id)]
-    #tag_id [FK(tag, id)]
+    #katanaDataId [FK(katana_data, id)]
+    #tagId[FK(tag, id)]
 }
 
 note left
@@ -24,10 +24,12 @@ end note
 
 entity "tag_table"{
     + id [PK]
+    name: String
     color: String
 }
 
 note left
+    name:タグの内容
     color:タグの色
 end note
 

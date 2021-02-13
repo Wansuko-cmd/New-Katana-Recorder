@@ -7,14 +7,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.wsr.katanarecorder.databinding.ItemListShowContent1Binding
 import com.wsr.katanarecorder.databinding.ItemListShowContent2Binding
 import com.wsr.katanarecorder.databinding.ItemListShowContent3Binding
-import com.wsr.katanarecorder.db.SampleModel
+import com.wsr.katanarecorder.db.entity.KatanaData
 import com.wsr.katanarecorder.main.list.detail.show.view_holder.ShowItem1Holder
 import com.wsr.katanarecorder.main.list.detail.show.view_holder.ShowItem2Holder
 import com.wsr.katanarecorder.main.list.detail.show.view_holder.ShowItem3Holder
 
 class ListShowAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
-    private var data: SampleModel = SampleModel()
+    private var katanaData: KatanaData = KatanaData()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -36,7 +36,7 @@ class ListShowAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     }
 
     override fun getItemCount(): Int {
-        return data.value.size + 2
+        return katanaData.data.size + 2
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -48,21 +48,21 @@ class ListShowAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     }
 
     private fun ShowItem1Holder.bind(){
-        if(data.url == null){
+        if(katanaData.imageName == null){
             image.visibility = GONE
         }
     }
 
     private fun ShowItem2Holder.bind(){
-        title.text = data.title
+        title.text = katanaData.title
     }
 
     private  fun ShowItem3Holder.bind(position: Int){
-        key.text = data.value[position].key
-        value.text = data.value[position].value
+        key.text = katanaData.data[position].key
+        value.text = katanaData.data[position].value
     }
 
-    fun setData(data: SampleModel){
-        this.data = data
+    fun setData(katanaData: KatanaData){
+        this.katanaData = katanaData
     }
 }

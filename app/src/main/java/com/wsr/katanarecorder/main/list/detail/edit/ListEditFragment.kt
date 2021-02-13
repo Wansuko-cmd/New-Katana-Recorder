@@ -63,7 +63,7 @@ class ListEditFragment : Fragment() {
 
         listViewModel = ViewModelProvider(
                 this,
-                ViewModelProvider.NewInstanceFactory()
+                ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
         ).get(ListViewModel::class.java)
 
         editViewModel = ViewModelProvider(
@@ -90,11 +90,11 @@ class ListEditFragment : Fragment() {
         }
 
 
-        listViewModel.sampleModel.observe(viewLifecycleOwner, { list ->
+        listViewModel.katanaData.observe(viewLifecycleOwner, { list ->
             list.find{it.id == id}?.let{
                 editViewModel.title.postValue(it.title)
-                editViewModel.setUriFromString(requireActivity(), it.url)
-                editViewModel.katanaValue.postValue(it.value)
+                editViewModel.setUriFromString(requireActivity(), it.imageName)
+                editViewModel.katanaValue.postValue(it.data)
 
             }
         })
