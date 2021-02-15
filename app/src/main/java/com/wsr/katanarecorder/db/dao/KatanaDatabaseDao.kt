@@ -11,10 +11,13 @@ import com.wsr.katanarecorder.db.entity.Tag
 @Dao
 interface KatanaDatabaseDao {
     @Insert
-    fun insertKatanaData(katanaData: KatanaData)
+    fun insertKatanaData(katanaData: KatanaData): Long
 
     @Insert
-    fun insertTag(tag: Tag)
+    fun insertKatanaDataTag(katanaDataTag: KatanaDataTag): Long
+
+    @Insert
+    fun insertTag(tag: Tag): Long
 
     @Query("SELECT * FROM katana_data_table")
     fun getAllFromKatanaDataTable(): LiveData<MutableList<KatanaData>>
@@ -25,6 +28,15 @@ interface KatanaDatabaseDao {
     @Query("SELECT * FROM tag_table")
     fun getAllFromTagTable(): LiveData<MutableList<Tag>>
 
+    @Query("SELECT * FROM tag_table INNER JOIN katana_data_tag_table ON tag_id=tag_foreign_id WHERE katana_data_foreign_id=:katanaDataId")
+    fun getTagFromKatanaData(katanaDataId: Int):List<Tag>
+
     @Query("DELETE FROM katana_data_table")
     fun deleteAllInKatanaDataTable()
+
+    @Query("DELETE FROM katana_data_tag_table")
+    fun deleteAllInKatanaDataTagTable()
+
+    @Query("DELETE FROM tag_table")
+    fun deleteAllInTagTable()
 }

@@ -10,20 +10,23 @@ import androidx.room.PrimaryKey
     foreignKeys = [
         ForeignKey(
             entity = KatanaData::class,
-            parentColumns = ["id"],
-            childColumns = ["katana_data_id"],
+            parentColumns = ["katana_data_id"],
+            childColumns = ["katana_data_foreign_id"],
             onDelete = ForeignKey.CASCADE
         ),
         ForeignKey(
             entity = Tag::class,
-            parentColumns = ["id"],
-            childColumns = ["tag_id"],
+            parentColumns = ["tag_id"],
+            childColumns = ["tag_foreign_id"],
             onDelete = ForeignKey.CASCADE
         )
     ]
 )
 data class KatanaDataTag(
-    @PrimaryKey(autoGenerate = true) val id: Int,
-    @ColumnInfo(name = "katana_data_id") val katanaDataId: Int,
-    @ColumnInfo(name = "tag_id") val TagId: Int
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name="katana_data_tag_id") val id: Int,
+    @ColumnInfo(name = "katana_data_foreign_id") val katanaDataId: Int,
+    @ColumnInfo(name = "tag_foreign_id") val TagId: Int
 )
+
+//primaryKeys = ["katana_data_foreign_id", "tag_foreign_id"],

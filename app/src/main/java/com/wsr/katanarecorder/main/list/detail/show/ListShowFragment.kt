@@ -1,6 +1,7 @@
 package com.wsr.katanarecorder.main.list.detail.show
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -78,6 +79,9 @@ class ListShowFragment : Fragment() {
         listViewModel.katanaData.observe(viewLifecycleOwner, { list ->
             list.find{it.id == id}?.let{
                 listShowAdapter.setData(it)
+
+                val test = listViewModel.getTagFromKatanaData(it.id)
+                Log.i("test", test.value.toString())
             }
         })
     }

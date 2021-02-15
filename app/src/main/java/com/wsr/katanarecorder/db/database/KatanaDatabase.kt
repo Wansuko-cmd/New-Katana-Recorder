@@ -1,6 +1,7 @@
 package com.wsr.katanarecorder.db.database
 
 import android.content.Context
+import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -16,6 +17,7 @@ import io.reactivex.Completable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import kotlin.math.log
 
 @Database(entities = [KatanaData::class, KatanaDataTag::class, Tag::class], version = 1, exportSchema = false)
 @TypeConverters(KatanaDataListConverter::class)
@@ -36,9 +38,13 @@ abstract class KatanaDatabase : RoomDatabase(){
 
         fun seeding(katanaDatabaseDao: KatanaDatabaseDao){
             Completable.fromAction{
+                katanaDatabaseDao.deleteAllInKatanaDataTagTable()
                 katanaDatabaseDao.deleteAllInKatanaDataTable()
+                katanaDatabaseDao.deleteAllInTagTable()
 
-                katanaDatabaseDao.insertKatanaData(
+                /*KatanaDataのシーディング*/
+
+                val katana = katanaDatabaseDao.insertKatanaData(
                         KatanaData(0, "備前長船盛光", null,
                                 mutableListOf(
                                         KatanaValue("銘", "備前長船盛光", 3),
@@ -59,6 +65,19 @@ abstract class KatanaDatabase : RoomDatabase(){
                                 )
                         )
                 )
+
+                /*Tagのシーディング*/
+                val tag = katanaDatabaseDao.insertTag(Tag(0, "備前伝", "red"))
+                katanaDatabaseDao.insertTag(Tag(0, "山城伝", "blue"))
+                katanaDatabaseDao.insertTag(Tag(0, "お気に入り", "yellow"))
+
+                /*KatanaDataとTagの中間テーブルのシーディング*/
+                val result = katanaDatabaseDao.insertKatanaDataTag(KatanaDataTag(0, katana.toInt(), tag.toInt()))
+                //katanaDatabaseDao.insertKatanaDataTag(KatanaDataTag(0, 2, 2))
+                //katanaDatabaseDao.insertKatanaDataTag(KatanaDataTag(0, 1, 3))
+
+                Log.i("result", result.toString())
+
             }
                     .subscribeOn(Schedulers.io())
                     .subscribe()
