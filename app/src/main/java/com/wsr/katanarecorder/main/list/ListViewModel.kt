@@ -19,7 +19,7 @@ class ListViewModel(application: Application) : AndroidViewModel(application){
     val allKatanaData: LiveData<MutableList<KatanaData>>
     val allTag: LiveData<MutableList<Tag>>
 
-    lateinit var tag: MutableLiveData<MutableList<Tag>>
+    lateinit var tag: LiveData<MutableList<Tag>>
 
     init{
         val katanaDatabaseDao: KatanaDatabaseDao = KatanaDatabase.getDatabase(application, viewModelScope).katanaDatabaseDao()
@@ -29,7 +29,7 @@ class ListViewModel(application: Application) : AndroidViewModel(application){
     }
 
     fun setTag(katanaDataId: Int) = viewModelScope.launch(Dispatchers.IO){
-        tag = katanaRepository.getTagFromKatanaData(katanaDataId) as MutableLiveData<MutableList<Tag>>
+        tag = katanaRepository.getTagFromKatanaData(katanaDataId)
     }
 
     fun insertKatanaData(katanaData: KatanaData) = viewModelScope.launch(Dispatchers.IO) {

@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.wsr.katanarecorder.BuildConfig
 import com.wsr.katanarecorder.db.KatanaValue
+import com.wsr.katanarecorder.db.entity.Tag
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withTimeout
 import java.io.File
@@ -20,6 +21,7 @@ class EditViewModel : ViewModel() {
     val title: MutableLiveData<String> = MutableLiveData<String>()
     val imageUri: MutableLiveData<Uri?> = MutableLiveData<Uri?>()
     val katanaValue: MutableLiveData<MutableList<KatanaValue>> = MutableLiveData<MutableList<KatanaValue>>()
+    val tagList: MutableLiveData<List<Tag>> = MutableLiveData<List<Tag>>()
 
     private var filename: String? = null
 

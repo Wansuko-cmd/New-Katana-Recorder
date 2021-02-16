@@ -75,6 +75,8 @@ class ListEditFragment : Fragment() {
                 ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
         ).get(ListViewModel::class.java)
 
+        listViewModel.setTag(id)
+
         editViewModel = ViewModelProvider(
                 this,
                 ViewModelProvider.NewInstanceFactory()
@@ -104,8 +106,11 @@ class ListEditFragment : Fragment() {
                 editViewModel.title.postValue(it.title)
                 editViewModel.setUriFromString(requireActivity(), it.imageName)
                 editViewModel.katanaValue.postValue(it.data)
-
             }
+        })
+
+        listViewModel.tag.observe(viewLifecycleOwner, {
+            editViewModel.tagList.postValue(it)
         })
 
         checkSetData = GlobalScope.launch(Dispatchers.Main) {
