@@ -58,16 +58,16 @@ class EditViewModel : ViewModel() {
                         output.write(buf, 0, len)
                     }
                     output.flush()
+
+                    //もともと設定してあった画像の削除
+                    this.filename?.let{
+                        val deleteFile = File(path, it)
+                        deleteFile.delete()
+                    }
+
+                    return newFilename
                 }
             }
-
-            //もともと設定してあった画像の削除
-            this.filename?.let{
-                val deleteFile = File(path, it)
-                deleteFile.delete()
-            }
-
-            return newFilename
         }
         return this.filename
     }

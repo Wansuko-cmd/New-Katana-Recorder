@@ -1,6 +1,7 @@
 package com.wsr.katanarecorder.main.list.detail.show
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
