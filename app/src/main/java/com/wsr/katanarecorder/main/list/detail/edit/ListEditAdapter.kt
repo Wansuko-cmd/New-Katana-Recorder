@@ -26,7 +26,7 @@ class ListEditAdapter(
             1 -> EditItem1Holder(ItemListEditContent1Binding.inflate(inflater, parent, false))
             2 -> EditItem2Holder(ItemListEditContent2Binding.inflate(inflater, parent, false))
             3 -> EditItem3Holder(ItemListEditContent3Binding.inflate(inflater, parent, false))
-            4 -> EditItem4Holder(ItemListEditContent4Binding.inflate(inflater, parent, false))
+            4 -> EditItem4Holder(ItemListEditContent4Binding.inflate(inflater, parent, false), parent.context)
             else -> TODO("エラー処理を書く")
         }
     }

@@ -31,7 +31,7 @@ abstract class KatanaDatabase : RoomDatabase(){
             super.onOpen(db)
             INSTANCE?.let{ database ->
                 scope.launch {
-                    //seeding(database.katanaDatabaseDao())
+                    seeding(database.katanaDatabaseDao())
                 }
             }
         }
@@ -67,14 +67,23 @@ abstract class KatanaDatabase : RoomDatabase(){
                 )
 
                 /*Tagのシーディング*/
-                val tag = katanaDatabaseDao.insertTag(Tag(0, "備前伝", "red"))
-                katanaDatabaseDao.insertTag(Tag(0, "山城伝", "blue"))
-                katanaDatabaseDao.insertTag(Tag(0, "お気に入り", "yellow"))
+                val tag1 = katanaDatabaseDao.insertTag(Tag(0, "備前伝", "red"))
+                val tag2 = katanaDatabaseDao.insertTag(Tag(0, "山城伝", "blue"))
+                val tag3 = katanaDatabaseDao.insertTag(Tag(0, "お気に入り", "yellow"))
+                val tag4 = katanaDatabaseDao.insertTag(Tag(0, "所有", "orange"))
+                val tag5 = katanaDatabaseDao.insertTag(Tag(0, "脇差", "green"))
+                val tag6 = katanaDatabaseDao.insertTag(Tag(0, "テスト用", "purple"))
 
                 /*KatanaDataとTagの中間テーブルのシーディング*/
-                val result = katanaDatabaseDao.insertKatanaDataTag(KatanaDataTag(0, katana.toInt(), tag.toInt()))
+                val result = katanaDatabaseDao.insertKatanaDataTag(KatanaDataTag(0, katana.toInt(), tag1.toInt()))
                 //katanaDatabaseDao.insertKatanaDataTag(KatanaDataTag(0, 2, 2))
                 //katanaDatabaseDao.insertKatanaDataTag(KatanaDataTag(0, 1, 3))
+                katanaDatabaseDao.insertKatanaDataTag(KatanaDataTag(0, katana.toInt(), tag2.toInt()))
+                katanaDatabaseDao.insertKatanaDataTag(KatanaDataTag(0, katana.toInt(), tag3.toInt()))
+                katanaDatabaseDao.insertKatanaDataTag(KatanaDataTag(0, katana.toInt(), tag4.toInt()))
+                katanaDatabaseDao.insertKatanaDataTag(KatanaDataTag(0, katana.toInt(), tag5.toInt()))
+                katanaDatabaseDao.insertKatanaDataTag(KatanaDataTag(0, katana.toInt(), tag6.toInt()))
+
 
                 Log.i("result", result.toString())
 

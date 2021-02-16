@@ -4,8 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
-import com.wsr.katanarecorder.databinding.ItemListEditContent4ChildBinding
+import com.wsr.katanarecorder.databinding.ItemListTagBinding
 import com.wsr.katanarecorder.db.entity.Tag
 import com.wsr.katanarecorder.main.list.detail.edit.view_holder.EditTagItemHolder
 
@@ -23,7 +22,7 @@ class ListEditTagAdapter: ListAdapter<Tag, EditTagItemHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EditTagItemHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return EditTagItemHolder(ItemListEditContent4ChildBinding.inflate(inflater, parent, false))
+        return EditTagItemHolder(ItemListTagBinding.inflate(inflater, parent, false))
     }
 
     override fun onBindViewHolder(holder: EditTagItemHolder, position: Int) {
