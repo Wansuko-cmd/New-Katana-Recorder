@@ -7,9 +7,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.wsr.katanarecorder.db.dao.KatanaDatabaseDao
 import com.wsr.katanarecorder.db.KatanaValue
 import com.wsr.katanarecorder.db.converter.KatanaDataListConverter
-import com.wsr.katanarecorder.db.dao.KatanaDatabaseDao
 import com.wsr.katanarecorder.db.entity.KatanaData
 import com.wsr.katanarecorder.db.entity.KatanaDataTag
 import com.wsr.katanarecorder.db.entity.Tag
@@ -17,6 +17,7 @@ import io.reactivex.Completable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import kotlin.math.log
 
 @Database(entities = [KatanaData::class, KatanaDataTag::class, Tag::class], version = 1, exportSchema = false)
 @TypeConverters(KatanaDataListConverter::class)

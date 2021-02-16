@@ -12,12 +12,16 @@ import com.wsr.katanarecorder.db.KatanaValue
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withTimeout
 import java.io.File
+import java.io.FileOutputStream
 import java.lang.Exception
+import java.util.*
 
 class EditViewModel : ViewModel() {
     val title: MutableLiveData<String> = MutableLiveData<String>()
     val imageUri: MutableLiveData<Uri?> = MutableLiveData<Uri?>()
     val katanaValue: MutableLiveData<MutableList<KatanaValue>> = MutableLiveData<MutableList<KatanaValue>>()
+
+    private var filename: String? = null
 
     lateinit var listEditImageSetter: ListEditImageSetter
 
@@ -33,6 +37,45 @@ class EditViewModel : ViewModel() {
             val uri = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID + ".provider", file)
             this.imageUri.postValue(uri)
         }
+        this.filename = filename
+    }
+
+    fun saveImage(activity: Activity): String?{
+        val newFilename = UUID.randomUUID().toString() + ".jpg"
+        val path = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        val file = File(path, newFilename)
+
+        if(isExternalStorageWritable()){
+            val output = FileOutputStream(file)
+
+            val buf = ByteArray(DEFAULT_BUFFER_SIZE)
+
+            imageUri.value?.let { uri ->
+                activity.contentResolver.openInputStream(uri)?.let { inputStream ->
+
+                    var len: Int
+                    while (inputStream.read(buf).let { len = it; it != -1 }) {
+                        output.write(buf, 0, len)
+                    }
+                    output.flush()
+                }
+            }
+
+            //もともと設定してあった画像の削除
+            this.filename?.let{
+                val deleteFile = File(path, it)
+                deleteFile.delete()
+            }
+
+            return newFilename
+        }
+        return this.filename
+    }
+
+    //書けるかどうかを確認するための関数
+    private fun isExternalStorageWritable(): Boolean{
+        val state = Environment.getExternalStorageState()
+        return Environment.MEDIA_MOUNTED == state
     }
 
     suspend fun checkSetData(): Boolean {

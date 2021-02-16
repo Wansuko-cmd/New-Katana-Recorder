@@ -32,8 +32,23 @@ class ListViewModel(application: Application) : AndroidViewModel(application){
         tag = katanaRepository.getTagFromKatanaData(katanaDataId) as MutableLiveData<MutableList<Tag>>
     }
 
+    fun insertKatanaData(katanaData: KatanaData) = viewModelScope.launch(Dispatchers.IO) {
+        katanaRepository.insertKatanaData(katanaData)
+    }
+
+    fun insertTag(tag: Tag) = viewModelScope.launch(Dispatchers.IO) {
+        katanaRepository.insertTag(tag)
+    }
+
     fun insertKatanaDataTag(katanaDataTag: KatanaDataTag) = viewModelScope.launch(Dispatchers.IO) {
         katanaRepository.insertKatanaDataTag(katanaDataTag)
     }
 
+    fun updateKatanaData(katanaData: KatanaData) = viewModelScope.launch(Dispatchers.IO) {
+        katanaRepository.updateKatanaData(katanaData)
+    }
+
+    fun updateTag(tag: Tag) = viewModelScope.launch(Dispatchers.IO) {
+        katanaRepository.updateTag(tag)
+    }
 }

@@ -1,23 +1,27 @@
 package com.wsr.katanarecorder.db.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.wsr.katanarecorder.db.entity.KatanaData
 import com.wsr.katanarecorder.db.entity.KatanaDataTag
 import com.wsr.katanarecorder.db.entity.Tag
 
 @Dao
 interface KatanaDatabaseDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertKatanaData(katanaData: KatanaData): Long
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertKatanaDataTag(katanaDataTag: KatanaDataTag): Long
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertTag(tag: Tag): Long
+
+    @Update
+    fun updateKatanaData(katanaData: KatanaData)
+
+    @Update
+    fun updateTag(tag: Tag)
 
     @Query("SELECT * FROM katana_data_table")
     fun getAllFromKatanaDataTable(): LiveData<MutableList<KatanaData>>

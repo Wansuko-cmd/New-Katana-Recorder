@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.wsr.katanarecorder.binding_adapter.ImageViewBindingAdapter.showImage
 import com.wsr.katanarecorder.databinding.ItemListShowContent1Binding
 import com.wsr.katanarecorder.databinding.ItemListShowContent2Binding
 import com.wsr.katanarecorder.databinding.ItemListShowContent3Binding
@@ -48,9 +49,7 @@ class ListShowAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     }
 
     private fun ShowItem1Holder.bind(){
-        if(katanaData.imageName == null){
-            image.visibility = GONE
-        }
+        image.showImage(katanaData.imageName)
     }
 
     private fun ShowItem2Holder.bind(){

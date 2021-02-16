@@ -1,6 +1,7 @@
 package com.wsr.katanarecorder.main.list.detail.edit
 
 import android.os.Bundle
+import android.os.Environment
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -9,11 +10,13 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wsr.katanarecorder.R
 import com.wsr.katanarecorder.databinding.FragmentListDetailEditBinding
+import com.wsr.katanarecorder.db.entity.KatanaData
 import com.wsr.katanarecorder.main.list.ListViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.util.*
 
 class ListEditFragment : Fragment() {
 
@@ -40,7 +43,13 @@ class ListEditFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.edit_save_menu -> {
-                listEditAdapter.notifyDataSetChanged()
+                val katanaData = KatanaData(
+                        args.id,
+                        editViewModel.title.value!!,
+                        editViewModel.saveImage(requireActivity()),
+                        editViewModel.katanaValue.value!!
+                )
+                listViewModel.updateKatanaData(katanaData)
                 true
             }
             else -> super.onOptionsItemSelected(item)
