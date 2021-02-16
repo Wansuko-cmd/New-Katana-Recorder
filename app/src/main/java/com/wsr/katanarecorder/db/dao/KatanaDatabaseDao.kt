@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import androidx.room.Transaction
 import com.wsr.katanarecorder.db.entity.KatanaData
 import com.wsr.katanarecorder.db.entity.KatanaDataTag
 import com.wsr.katanarecorder.db.entity.Tag

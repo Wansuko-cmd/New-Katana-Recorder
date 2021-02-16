@@ -1,10 +1,9 @@
 package com.wsr.katanarecorder.repository
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import com.wsr.katanarecorder.db.dao.KatanaDatabaseDao
 import com.wsr.katanarecorder.db.entity.KatanaData
 import com.wsr.katanarecorder.db.entity.KatanaDataTag
-import com.wsr.katanarecorder.db.dao.KatanaDatabaseDao
 import com.wsr.katanarecorder.db.entity.Tag
 
 class KatanaRepository(private val katanaDatabaseDao: KatanaDatabaseDao) {

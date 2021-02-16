@@ -13,7 +13,6 @@ import com.wsr.katanarecorder.db.entity.Tag
 import com.wsr.katanarecorder.repository.KatanaRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class ListViewModel(application: Application) : AndroidViewModel(application){
     private val katanaRepository: KatanaRepository
