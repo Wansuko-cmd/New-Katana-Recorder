@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Transaction
 import com.wsr.katanarecorder.db.entity.KatanaData
 import com.wsr.katanarecorder.db.entity.KatanaDataTag
 import com.wsr.katanarecorder.db.entity.Tag
@@ -29,7 +30,7 @@ interface KatanaDatabaseDao {
     fun getAllFromTagTable(): LiveData<MutableList<Tag>>
 
     @Query("SELECT * FROM tag_table INNER JOIN katana_data_tag_table ON tag_id=tag_foreign_id WHERE katana_data_foreign_id=:katanaDataId")
-    fun getTagFromKatanaData(katanaDataId: Int):List<Tag>
+    fun getTagFromKatanaData(katanaDataId: Int): LiveData<MutableList<Tag>>
 
     @Query("DELETE FROM katana_data_table")
     fun deleteAllInKatanaDataTable()

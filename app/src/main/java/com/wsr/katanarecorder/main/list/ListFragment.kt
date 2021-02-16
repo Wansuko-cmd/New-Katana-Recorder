@@ -47,7 +47,7 @@ class ListFragment : Fragment() {
             adapter = listAdapter
         }
 
-        listViewModel.katanaData.observe(viewLifecycleOwner, {
+        listViewModel.allKatanaData.observe(viewLifecycleOwner, {
             it?.let{
                 listAdapter.setData(it)
             }

@@ -17,27 +17,24 @@ import kotlinx.coroutines.runBlocking
 
 class ListViewModel(application: Application) : AndroidViewModel(application){
     private val katanaRepository: KatanaRepository
-    val katanaData: LiveData<MutableList<KatanaData>>
-    val katanaDataTag: LiveData<MutableList<KatanaDataTag>>
-    val tag: LiveData<MutableList<Tag>>
+    val allKatanaData: LiveData<MutableList<KatanaData>>
+    val allTag: LiveData<MutableList<Tag>>
+
+    lateinit var tag: MutableLiveData<MutableList<Tag>>
+
     init{
         val katanaDatabaseDao: KatanaDatabaseDao = KatanaDatabase.getDatabase(application, viewModelScope).katanaDatabaseDao()
         katanaRepository = KatanaRepository(katanaDatabaseDao)
-        katanaData = katanaRepository.katanaData
-        katanaDataTag = katanaRepository.katanaDataTag
-        tag = katanaRepository.tag
+        allKatanaData = katanaRepository.allKatanaData
+        allTag = katanaRepository.allTag
+    }
+
+    fun setTag(katanaDataId: Int) = viewModelScope.launch(Dispatchers.IO){
+        tag = katanaRepository.getTagFromKatanaData(katanaDataId) as MutableLiveData<MutableList<Tag>>
     }
 
     fun insertKatanaDataTag(katanaDataTag: KatanaDataTag) = viewModelScope.launch(Dispatchers.IO) {
         katanaRepository.insertKatanaDataTag(katanaDataTag)
-    }
-
-    fun getTagFromKatanaData(katanaDataId: Int): LiveData<List<Tag>>{
-        val result: MutableLiveData<List<Tag>> = MutableLiveData()
-        viewModelScope.launch(Dispatchers.IO) {
-            result.postValue(katanaRepository.getTagFromKatanaData(katanaDataId))
-        }
-        return result
     }
 
 }

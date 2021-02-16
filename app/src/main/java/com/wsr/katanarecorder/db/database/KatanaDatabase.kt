@@ -31,7 +31,7 @@ abstract class KatanaDatabase : RoomDatabase(){
             super.onOpen(db)
             INSTANCE?.let{ database ->
                 scope.launch {
-                    seeding(database.katanaDatabaseDao())
+                    //seeding(database.katanaDatabaseDao())
                 }
             }
         }

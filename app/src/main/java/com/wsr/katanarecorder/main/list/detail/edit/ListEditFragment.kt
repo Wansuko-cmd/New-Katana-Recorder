@@ -90,7 +90,7 @@ class ListEditFragment : Fragment() {
         }
 
 
-        listViewModel.katanaData.observe(viewLifecycleOwner, { list ->
+        listViewModel.allKatanaData.observe(viewLifecycleOwner, { list ->
             list.find{it.id == id}?.let{
                 editViewModel.title.postValue(it.title)
                 editViewModel.setUriFromString(requireActivity(), it.imageName)

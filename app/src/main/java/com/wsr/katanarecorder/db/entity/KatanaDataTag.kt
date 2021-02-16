@@ -12,13 +12,15 @@ import androidx.room.PrimaryKey
             entity = KatanaData::class,
             parentColumns = ["katana_data_id"],
             childColumns = ["katana_data_foreign_id"],
-            onDelete = ForeignKey.CASCADE
+            onDelete = ForeignKey.CASCADE,
+            onUpdate = ForeignKey.CASCADE
         ),
         ForeignKey(
             entity = Tag::class,
             parentColumns = ["tag_id"],
             childColumns = ["tag_foreign_id"],
-            onDelete = ForeignKey.CASCADE
+            onDelete = ForeignKey.CASCADE,
+            onUpdate = ForeignKey.CASCADE
         )
     ]
 )

@@ -64,5 +64,6 @@ class ListShowAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     fun setData(katanaData: KatanaData){
         this.katanaData = katanaData
+        notifyDataSetChanged()
     }
 }

@@ -76,12 +76,9 @@ class ListShowFragment : Fragment() {
             adapter = listShowAdapter
         }
 
-        listViewModel.katanaData.observe(viewLifecycleOwner, { list ->
+        listViewModel.allKatanaData.observe(viewLifecycleOwner, { list ->
             list.find{it.id == id}?.let{
                 listShowAdapter.setData(it)
-
-                val test = listViewModel.getTagFromKatanaData(it.id)
-                Log.i("test", test.value.toString())
             }
         })
     }
