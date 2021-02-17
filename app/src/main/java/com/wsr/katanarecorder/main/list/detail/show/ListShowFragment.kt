@@ -64,6 +64,8 @@ class ListShowFragment : Fragment() {
             ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
         ).get(ListViewModel::class.java)
 
+        listViewModel.setTag(id)
+
         val divider = DividerItemDecoration(
             requireContext(),
             LinearLayoutManager(requireContext()).orientation
@@ -79,6 +81,12 @@ class ListShowFragment : Fragment() {
         listViewModel.allKatanaData.observe(viewLifecycleOwner, { list ->
             list.find{it.id == id}?.let{
                 listShowAdapter.setData(it)
+            }
+        })
+
+        listViewModel.tag.observe(viewLifecycleOwner, {
+            it?.let{
+                listShowAdapter.setTagList(it)
             }
         })
     }
