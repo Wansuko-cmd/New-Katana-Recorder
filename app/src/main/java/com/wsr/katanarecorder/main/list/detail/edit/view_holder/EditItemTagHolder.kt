@@ -1,14 +1,13 @@
 package com.wsr.katanarecorder.main.list.detail.edit.view_holder
 
 import android.content.Context
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.*
-import com.wsr.katanarecorder.databinding.ItemListEditContent4Binding
+import com.wsr.katanarecorder.databinding.ItemListEditTagBinding
 import com.wsr.katanarecorder.db.entity.Tag
 import com.wsr.katanarecorder.main.list.detail.edit.ListEditTagAdapter
 
-class EditItem4Holder(binding: ItemListEditContent4Binding, context: Context) : RecyclerView.ViewHolder(binding.root) {
+class EditItemTagHolder(binding: ItemListEditTagBinding, context: Context) : RecyclerView.ViewHolder(binding.root) {
     private val listEditTagAdapter = ListEditTagAdapter()
 
     init{

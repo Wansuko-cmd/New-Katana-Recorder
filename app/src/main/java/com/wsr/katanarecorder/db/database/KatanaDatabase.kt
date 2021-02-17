@@ -47,12 +47,12 @@ abstract class KatanaDatabase : RoomDatabase(){
                 val katana = katanaDatabaseDao.insertKatanaData(
                         KatanaData(0, "備前長船盛光", null,
                                 mutableListOf(
-                                        KatanaValue("銘", "備前長船盛光", 3),
-                                        KatanaValue("種別", "太刀", 3),
-                                        KatanaValue("産地", "備前長船派", 3),
-                                        KatanaValue("時代", "室町中期", 3),
-                                        KatanaValue("刃長", "79cm", 3),
-                                        KatanaValue("備考", "こちらは備前長船刀剣博物館にて貯蔵されている一振り。室町前期の太刀でありながら生ぶであり、大変貴重なものとなっている。", 3)
+                                        KatanaValue("銘", "備前長船盛光", 1),
+                                        KatanaValue("種別", "太刀", 1),
+                                        KatanaValue("産地", "備前長船派", 1),
+                                        KatanaValue("時代", "室町中期", 1),
+                                        KatanaValue("刃長", "79cm", 1),
+                                        KatanaValue("備考", "こちらは備前長船刀剣博物館にて貯蔵されている一振り。室町前期の太刀でありながら生ぶであり、大変貴重なものとなっている。", 1)
                                 )
                         )
                 )
@@ -60,8 +60,8 @@ abstract class KatanaDatabase : RoomDatabase(){
                 katanaDatabaseDao.insertKatanaData(
                         KatanaData(0, "テスト丸", null,
                                 mutableListOf(
-                                        KatanaValue("TEST", "これはテストです", 3),
-                                        KatanaValue("Hello", "World", 3)
+                                        KatanaValue("TEST", "これはテストです", 1),
+                                        KatanaValue("Hello", "World", 1)
                                 )
                         )
                 )
