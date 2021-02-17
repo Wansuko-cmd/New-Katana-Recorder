@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.wsr.katanarecorder.R
 import com.wsr.katanarecorder.databinding.FragmentListDetailEditBinding
 import com.wsr.katanarecorder.db.entity.KatanaData
+import com.wsr.katanarecorder.main.list.ListFactory
 import com.wsr.katanarecorder.main.list.ListViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -41,7 +42,7 @@ class ListEditFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
+        return when (item.itemId) {
             R.id.edit_save_menu -> {
                 val katanaData = KatanaData(
                         args.id,
@@ -57,9 +58,9 @@ class ListEditFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         _binding = FragmentListDetailEditBinding.inflate(inflater, container, false)
         return binding.root
@@ -72,10 +73,8 @@ class ListEditFragment : Fragment() {
 
         listViewModel = ViewModelProvider(
                 this,
-                ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
+                ListFactory(requireActivity().application, id)
         ).get(ListViewModel::class.java)
-
-        listViewModel.setTag(id)
 
         editViewModel = ViewModelProvider(
                 this,
@@ -93,7 +92,7 @@ class ListEditFragment : Fragment() {
                 LinearLayoutManager(requireContext()).orientation
         )
 
-        recyclerView.apply{
+        recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(divider)
@@ -102,19 +101,23 @@ class ListEditFragment : Fragment() {
 
 
         listViewModel.allKatanaData.observe(viewLifecycleOwner, { list ->
-            list.find{it.id == id}?.let{
+            list.find { it.id == id }?.let {
                 editViewModel.title.postValue(it.title)
                 editViewModel.setUriFromString(requireActivity(), it.imageName)
                 editViewModel.katanaValue.postValue(it.data)
             }
         })
 
-        listViewModel.tag.observe(viewLifecycleOwner, {
-            editViewModel.tagList.postValue(it)
-        })
+        listViewModel.tag?.let { viewModel ->
+            viewModel.observe(viewLifecycleOwner, { tag ->
+                tag?.let {
+                    editViewModel.tagList.postValue(tag)
+                }
+            })
 
-        checkSetData = GlobalScope.launch(Dispatchers.Main) {
-            if(editViewModel.checkSetData()) listEditAdapter.notifyDataSetChanged()
+            checkSetData = GlobalScope.launch(Dispatchers.Main) {
+                if (editViewModel.checkSetData()) listEditAdapter.notifyDataSetChanged()
+            }
         }
     }
 

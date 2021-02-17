@@ -3,11 +3,11 @@ package com.wsr.katanarecorder.main.list.detail.show.view_holder
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.*
-import com.wsr.katanarecorder.databinding.ItemListShowContent4Binding
+import com.wsr.katanarecorder.databinding.ItemListShowTagBinding
 import com.wsr.katanarecorder.db.entity.Tag
 import com.wsr.katanarecorder.main.list.detail.show.ListShowTagAdapter
 
-class ShowItem4Holder(binding: ItemListShowContent4Binding, context: Context) : RecyclerView.ViewHolder(binding.root) {
+class ShowItemTagHolder(binding: ItemListShowTagBinding, context: Context) : RecyclerView.ViewHolder(binding.root) {
     private val listShowTagAdapter = ListShowTagAdapter()
 
     init{

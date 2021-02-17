@@ -5,16 +5,10 @@ import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.wsr.katanarecorder.binding_adapter.ImageViewBindingAdapter.showImage
-import com.wsr.katanarecorder.databinding.ItemListShowContent1Binding
-import com.wsr.katanarecorder.databinding.ItemListShowContent2Binding
-import com.wsr.katanarecorder.databinding.ItemListShowContent3Binding
-import com.wsr.katanarecorder.databinding.ItemListShowContent4Binding
+import com.wsr.katanarecorder.databinding.*
 import com.wsr.katanarecorder.db.entity.KatanaData
 import com.wsr.katanarecorder.db.entity.Tag
-import com.wsr.katanarecorder.main.list.detail.show.view_holder.ShowItem1Holder
-import com.wsr.katanarecorder.main.list.detail.show.view_holder.ShowItem2Holder
-import com.wsr.katanarecorder.main.list.detail.show.view_holder.ShowItem3Holder
-import com.wsr.katanarecorder.main.list.detail.show.view_holder.ShowItem4Holder
+import com.wsr.katanarecorder.main.list.detail.show.view_holder.*
 
 class ListShowAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
@@ -25,47 +19,37 @@ class ListShowAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
         val inflater = LayoutInflater.from(parent.context)
 
         return when(viewType){
-            1 -> ShowItem1Holder(ItemListShowContent1Binding.inflate(inflater, parent, false))
-            2 -> ShowItem2Holder(ItemListShowContent2Binding.inflate(inflater, parent, false))
-            3 -> ShowItem3Holder(ItemListShowContent3Binding.inflate(inflater, parent, false))
-            4 -> ShowItem4Holder(ItemListShowContent4Binding.inflate(inflater, parent, false), parent.context)
-            else -> TODO("エラー処理を書く")
+            VIEW_TYPE_TOP_IMAGE -> ShowItemTopImageHolder(ItemListShowTopImageBinding.inflate(inflater, parent, false))
+            VIEW_TYPE_TITLE -> ShowItemTitleHolder(ItemListShowTitleBinding.inflate(inflater, parent, false))
+            VIEW_TYPE_TAG -> ShowItemTagHolder(ItemListShowTagBinding.inflate(inflater, parent, false), parent.context)
+            VIEW_TYPE_CONTENT_TEXT_VIEW -> ShowItemContentTextViewHolder(ItemListShowContentTextViewBinding.inflate(inflater, parent, false))
+            else -> {
+                //getItemViewTypeを通るので基本起こりえない
+                ShowItemContentTextViewHolder(ItemListShowContentTextViewBinding.inflate(inflater, parent, false))
+            }
         }
     }
 
     override fun getItemViewType(position: Int): Int {
         return when(position){
-            0 -> 1
-            1 -> 2
-            2 -> 4
-            else -> 3
+            0 -> VIEW_TYPE_TOP_IMAGE
+            1 -> VIEW_TYPE_TITLE
+            2 -> VIEW_TYPE_TAG
+            else -> VIEW_TYPE_CONTENT_TEXT_VIEW
         }
     }
 
     override fun getItemCount(): Int {
-        return katanaData.data.size + 2
+        return katanaData.data.size + 3
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder){
-            is ShowItem1Holder -> holder.bind()
-            is ShowItem2Holder -> holder.bind()
-            is ShowItem3Holder -> holder.bind(position - 2)
-            is ShowItem4Holder -> holder.setData(tagList)
+            is ShowItemTopImageHolder -> holder.setBind(katanaData.imageName)
+            is ShowItemTitleHolder -> holder.setBind(katanaData.title)
+            is ShowItemTagHolder -> holder.setData(tagList)
+            is ShowItemContentTextViewHolder -> holder.setBind(katanaData.data[position - 3].key, katanaData.data[position - 3].value)
         }
-    }
-
-    private fun ShowItem1Holder.bind(){
-        image.showImage(katanaData.imageName)
-    }
-
-    private fun ShowItem2Holder.bind(){
-        title.text = katanaData.title
-    }
-
-    private  fun ShowItem3Holder.bind(position: Int){
-        key.text = katanaData.data[position].key
-        value.text = katanaData.data[position].value
     }
 
     fun setData(katanaData: KatanaData){
@@ -76,5 +60,12 @@ class ListShowAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     fun setTagList(tagList: List<Tag>){
         this.tagList = tagList
         notifyDataSetChanged()
+    }
+
+    companion object{
+        private const val VIEW_TYPE_TOP_IMAGE = -1
+        private const val VIEW_TYPE_TITLE = -2
+        private const val VIEW_TYPE_TAG = -3
+        private const val VIEW_TYPE_CONTENT_TEXT_VIEW = 1
     }
 }

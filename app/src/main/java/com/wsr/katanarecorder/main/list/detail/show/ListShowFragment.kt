@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wsr.katanarecorder.R
 import com.wsr.katanarecorder.databinding.FragmentListDetailShowBinding
+import com.wsr.katanarecorder.main.list.ListFactory
 import com.wsr.katanarecorder.main.list.ListViewModel
 
 class ListShowFragment : Fragment() {
@@ -33,7 +34,7 @@ class ListShowFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
+        return when (item.itemId) {
             R.id.show_edit_menu -> {
                 val action = ListShowFragmentDirections.showDetailToEditDetail(args.id)
                 findNavController().navigate(action)
@@ -44,9 +45,9 @@ class ListShowFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         _binding = FragmentListDetailShowBinding.inflate(inflater, container, false)
         return binding.root
@@ -60,18 +61,16 @@ class ListShowFragment : Fragment() {
         listShowAdapter = ListShowAdapter()
 
         listViewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
+                this,
+                ListFactory(requireActivity().application, id)
         ).get(ListViewModel::class.java)
 
-        listViewModel.setTag(id)
-
         val divider = DividerItemDecoration(
-            requireContext(),
-            LinearLayoutManager(requireContext()).orientation
+                requireContext(),
+                LinearLayoutManager(requireContext()).orientation
         )
 
-        recyclerView.apply{
+        recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(divider)
@@ -79,16 +78,18 @@ class ListShowFragment : Fragment() {
         }
 
         listViewModel.allKatanaData.observe(viewLifecycleOwner, { list ->
-            list.find{it.id == id}?.let{
+            list.find { it.id == id }?.let {
                 listShowAdapter.setData(it)
             }
         })
 
-        listViewModel.tag.observe(viewLifecycleOwner, {
-            it?.let{
-                listShowAdapter.setTagList(it)
-            }
-        })
+        listViewModel.tag?.let { viewModel ->
+            viewModel.observe(viewLifecycleOwner, { tag ->
+                tag?.let {
+                    listShowAdapter.setTagList(it)
+                }
+            })
+        }
     }
 
     override fun onDestroyView() {

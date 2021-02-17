@@ -14,22 +14,21 @@ import com.wsr.katanarecorder.repository.KatanaRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ListViewModel(application: Application) : AndroidViewModel(application){
+class ListViewModel(application: Application, id: Int?) : AndroidViewModel(application){
     private val katanaRepository: KatanaRepository
     val allKatanaData: LiveData<MutableList<KatanaData>>
     val allTag: LiveData<MutableList<Tag>>
 
-    lateinit var tag: LiveData<MutableList<Tag>>
+    var tag: LiveData<MutableList<Tag>>? = null
 
-    init{
+    init {
         val katanaDatabaseDao: KatanaDatabaseDao = KatanaDatabase.getDatabase(application, viewModelScope).katanaDatabaseDao()
         katanaRepository = KatanaRepository(katanaDatabaseDao)
         allKatanaData = katanaRepository.allKatanaData
         allTag = katanaRepository.allTag
-    }
-
-    fun setTag(katanaDataId: Int) = viewModelScope.launch(Dispatchers.IO){
-        tag = katanaRepository.getTagFromKatanaData(katanaDataId)
+        id?.let {
+            tag = katanaRepository.getTagFromKatanaData(it)
+        }
     }
 
     fun insertKatanaData(katanaData: KatanaData) = viewModelScope.launch(Dispatchers.IO) {

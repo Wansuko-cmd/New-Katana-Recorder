@@ -38,7 +38,7 @@ class ListFragment : Fragment() {
 
         listViewModel = ViewModelProvider(
                 this,
-                ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
+                ListFactory(requireActivity().application)
         ).get(ListViewModel::class.java)
 
         recyclerView.apply {

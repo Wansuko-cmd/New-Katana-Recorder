@@ -34,12 +34,12 @@ class ListEditAdapter(
             0 -> VIEW_TYPE_TOP_IMAGE
             1 -> VIEW_TYPE_TITLE
             2 -> VIEW_TYPE_TAG
-            else -> if(editViewModel.katanaValue.value != null) editViewModel.katanaValue.value!![position - 2].type else 0
+            else -> if(editViewModel.katanaValue.value != null) editViewModel.katanaValue.value!![position - 3].type else 0
         }
     }
 
     override fun getItemCount(): Int {
-        return if(editViewModel.katanaValue.value != null) editViewModel.katanaValue.value!!.size + 2 else 0
+        return if(editViewModel.katanaValue.value != null) editViewModel.katanaValue.value!!.size + 3 else 0
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -47,7 +47,7 @@ class ListEditAdapter(
             is EditItemTopImageHolder -> holder.setBind(viewLifecycleOwner, editViewModel)
             is EditItemTitleHolder -> holder.setBind(viewLifecycleOwner, editViewModel)
             is EditItemTagHolder -> editViewModel.tagList.value?.let { holder.setData(it) }
-            is EditItemContentEditTextHolder -> holder.setBind(viewLifecycleOwner, editViewModel, position - 2)
+            is EditItemContentEditTextHolder -> holder.setBind(viewLifecycleOwner, editViewModel, position - 3)
         }
     }
 
