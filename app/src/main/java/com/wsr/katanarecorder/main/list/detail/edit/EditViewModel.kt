@@ -23,6 +23,8 @@ class EditViewModel : ViewModel() {
     val katanaValue: MutableLiveData<MutableList<KatanaValue>> = MutableLiveData<MutableList<KatanaValue>>()
     val tagList: MutableLiveData<List<Tag>> = MutableLiveData<List<Tag>>()
 
+    val position: MutableLiveData<Int> = MutableLiveData()
+
     private var filename: String? = null
 
     lateinit var listEditImageSetter: ListEditImageSetter
@@ -40,6 +42,12 @@ class EditViewModel : ViewModel() {
             this.imageUri.postValue(uri)
         }
         this.filename = filename
+    }
+
+    fun addValue(listEditAdapter: ListEditAdapter, position: Int){
+        katanaValue.value?.add(KatanaValue())
+        listEditAdapter.notifyItemInserted(position)
+        this.position.postValue(position + 1)
     }
 
     fun saveImage(activity: Activity): String?{

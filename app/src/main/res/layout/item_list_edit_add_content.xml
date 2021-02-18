@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="editViewModel"
+            type="com.wsr.katanarecorder.main.list.detail.edit.EditViewModel" />
+
+        <variable
+            name="listEditAdapter"
+            type="com.wsr.katanarecorder.main.list.detail.edit.ListEditAdapter" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="3dp"
+        tools:ignore="MissingConstraints">
+
+        <ImageButton
+            android:id="@+id/list_edit_add_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="@{() -> editViewModel.addValue(listEditAdapter, editViewModel.position)}"
+            android:src="@drawable/ic_baseline_add_24" />
+    </LinearLayout>
+
+</layout>

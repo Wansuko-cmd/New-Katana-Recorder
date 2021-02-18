@@ -9,7 +9,7 @@ package com.wsr.katanarecorder.db
 * */
 
 data class KatanaValue(
-    var key: String,
-    var value: String,
-    var type: Int
+    var key: String = "",
+    var value: String = "",
+    var type: Int = 1
 )

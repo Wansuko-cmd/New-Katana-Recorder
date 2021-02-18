@@ -1,5 +1,6 @@
 package com.wsr.katanarecorder.main.list.detail.edit
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
@@ -23,6 +24,8 @@ class ListEditAdapter(
             -> EditItemTitleHolder(ItemListEditTitleBinding.inflate(inflater, parent, false))
             VIEW_TYPE_TAG
             -> EditItemTagHolder(ItemListEditTagBinding.inflate(inflater, parent, false), parent.context)
+            VIEW_TYPE_ADD_CONTENT
+            -> EditItemAddContentHolder(ItemListEditAddContentBinding.inflate(inflater, parent, false))
             VIEW_TYPE_CONTENT_EDIT_TEXT
             -> EditItemContentEditTextHolder(ItemListEditContentEditTextBinding.inflate(inflater, parent, false))
             else -> TODO("エラー処理を書く")
@@ -30,16 +33,18 @@ class ListEditAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
+        Log.i("ItemCount", itemCount.toString())
         return when(position){
             0 -> VIEW_TYPE_TOP_IMAGE
             1 -> VIEW_TYPE_TITLE
             2 -> VIEW_TYPE_TAG
+            itemCount - 1 -> VIEW_TYPE_ADD_CONTENT
             else -> if(editViewModel.katanaValue.value != null) editViewModel.katanaValue.value!![position - 3].type else 0
         }
     }
 
     override fun getItemCount(): Int {
-        return if(editViewModel.katanaValue.value != null) editViewModel.katanaValue.value!!.size + 3 else 0
+        return if(editViewModel.katanaValue.value != null) editViewModel.katanaValue.value!!.size + 4 else 0
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -48,6 +53,10 @@ class ListEditAdapter(
             is EditItemTitleHolder -> holder.setBind(viewLifecycleOwner, editViewModel)
             is EditItemTagHolder -> editViewModel.tagList.value?.let { holder.setData(it) }
             is EditItemContentEditTextHolder -> holder.setBind(viewLifecycleOwner, editViewModel, position - 3)
+            is EditItemAddContentHolder -> {
+                editViewModel.position.postValue(position)
+                holder.setBind(editViewModel, this)
+            }
         }
     }
 
@@ -55,6 +64,7 @@ class ListEditAdapter(
         private const val VIEW_TYPE_TOP_IMAGE = -1
         private const val VIEW_TYPE_TITLE = -2
         private const val VIEW_TYPE_TAG = -3
+        private const val VIEW_TYPE_ADD_CONTENT = -4
         private const val VIEW_TYPE_CONTENT_EDIT_TEXT = 1
     }
 }
